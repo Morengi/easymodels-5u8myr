@@ -1,0 +1,123 @@
+table {
+  height: 100vh;
+  background-color: #3c7a7c;
+}
+
+td {
+  vertical-align: top;
+  text-align: center;
+  cursor: pointer;
+}
+.card {
+  background-color: #fff;
+  border: 1px #113435;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+}
+.card_block {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 10px;
+  /* justify-cfdkujhlfdkuhfkjhiuofioh;fio;hfdoli;hjfl;iokhoi;jfdifiolj;fioj;ffilontent:space-evenly ; */
+  align-content: space-evenly;
+  /* height: 100%; */
+}
+
+h3,
+h3 code {
+  font-size: 20px;
+}
+
+.flex {
+  display: flex;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.container {
+  /* flex: 1; */
+  min-height: 20vh;
+}
+.container:not(:last-child) {
+  margin-right: 8px;
+}
+textarea {
+  resize: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  padding-bottom: 40px;
+  width: 90%;
+  margin: auto;
+  /* height: 10px; */
+  /* width: 80vw; */
+}
+textarea:focus {
+  outline: none;
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
+}
+.text_block {
+  width: 100%;
+}
+
+.vamp {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  margin: 5px;
+  list-style: none;
+  padding: 10px;
+  color: #222;
+  box-sizing: border-box;
+  cursor: grab;
+}
+.vamp:target {
+  /* cursor: grabbing; */
+}
+.vamp:active {
+  cursor: grabbing;
+}
+.vamp:not(:last-child) {
+  /* border-bottom: 1px solid #777; */
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: lightblue;
+}
+
+.add_card {
+  /* display:none; */
+  opacity: 0;
+  transition: all 0.4s ease;
+  background-color: rgba(255, 255, 255, 0.4);
+  margin: 5px;
+  padding: 10px 0;
+}
+.add_card:hover {
+  /* display:block; textarea */
+  opacity: 1;
+}
+.save_text {
+  position: relative;
+  bottom: 30px;
+  left: 70px;
+}
+.name {
+  /* font-size: 1.3em; */
+  margin: 0 10px 5px;
+  font-weight: 500;
+  color: #111;
+  text-align: right;
+}
+.text {
+  font-size: 1.4em;
+  font-weight: 300;
+  margin: 0.4em 0;
+  white-space: pre-wrap; /*учёт переноса сток при печати*/
+  word-wrap: break-word;
+  box-sizing: border-box;
+}

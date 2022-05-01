@@ -1,0 +1,62 @@
+<table border="1" class="canva" width="100%">
+  <tr>
+    <td rowspan="2" class="container"  >
+      Партнеры
+      <div class="card_block"dragula="segments" [(dragulaModel)]="vamps">
+      
+      <div class="vamp" *ngFor="let vamp of vamps; let i = index">
+      <h3 class="name">{{vamp.name}}</h3>
+      <div class="text_block">
+      <textarea *ngIf='!vamp.show_text' autosize [minRows]="1" [(ngModel)]="vamp.text" (input)="inputText($event)" (keydown.control.enter)="onCtrlEnter(i,0)" ></textarea>
+      <p class="text" *ngIf='vamp.show_text' (click)="changeText(i,0)">{{vamp.text}}</p>
+      <!-- <button *ngIf='show' (click)="clickOk()" class="save_text">OK</button> -->
+      </div>
+      <!-- <textarea autosize [minRows]="1" [(ngModel)]="vamp.name"></textarea> -->
+    </div>
+      <!-- <div class="add_card">
+      <input [(ngModel)]="temp_text" >
+        <button></button>
+      </div> -->
+      </div>
+      <div class="add_card" (click)="addCard(0)">Добавить карточку</div>
+    </td>
+
+    <td class="container">
+      Виды деятельности
+      <div class="card_block"dragula="segments" [(dragulaModel)]="vamps2">
+      <div class="vamp" *ngFor="let vamp of vamps2; let i = index">
+        <h3 class="name">{{vamp.name}}</h3>
+        <div class="text_block">
+        <textarea *ngIf='!vamp.show_text' autosize [minRows]="1" [(ngModel)]="vamp.text" (input)="inputText($event)" (keydown.control.enter)="onCtrlEnter(i,1)" ></textarea>
+        <p class="text" *ngIf='vamp.show_text' (click)="changeText(i,1)">{{vamp.text}}</p>
+        <!-- <button *ngIf='show' (click)="clickOk()" class="save_text">OK</button> -->
+        </div>
+        <!-- <textarea autosize [minRows]="1" [(ngModel)]="vamp.name"></textarea> -->
+      </div>
+      </div>
+      <div class="add_card" (click)="addCard(1)">Добавить карточку</div>
+    </td>
+    <td rowspan="2">
+      Ценности
+      <div class="card_block"dragula="segments" [(dragulaModel)]="vamps3">
+        <div class="vamp" *ngFor="let vamp of vamps3; let i = index">
+          <h3>
+            
+          </h3>
+        </div>
+        <div class="add_card" (click)="addCard(0)"> </div>
+      </div>
+    </td>
+    <td>Отношения с покупателями</td>
+    <td rowspan="2">Покупатели</td>
+  </tr>
+  <tr>
+    <td>Ресурсы</td>
+    <td>Каналы сбыта</td>
+  </tr>
+  <tr>
+    <td colspan="3">Затраты</td>
+    <td colspan="2">Доходы</td>
+  </tr>
+</table>
+<!-- <pinch-zoom> </pinch-zoom> -->
