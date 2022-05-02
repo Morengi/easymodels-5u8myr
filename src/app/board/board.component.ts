@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
 import { AutosizeModule } from 'ngx-autosize';
+import { findIndex } from 'rxjs/operators';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -9,9 +10,9 @@ import { AutosizeModule } from 'ngx-autosize';
 })
 export class BoardComponent implements OnInit {
   user_name: string = 'user';
-  show: boolean = false;
-  textarea_show: boolean = false;
+
   cards_of_key_partners: card[] = [];
+
   cards_of_key_actions: card[] = [];
   cards_of_key_resources: card[] = [];
   cards_of_value_proposition: card[] = [];
@@ -20,100 +21,6 @@ export class BoardComponent implements OnInit {
   cards_of_customer_segments: card[] = [];
   cards_of_cost_structure: card[] = [];
   cards_of_income_streams: card[] = [];
-
-  temp_text: string = '';
-  vamps = [
-    {
-      name: 'Bad Vamp',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'Petrovitch the Slain',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'Bob of the Everglades',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'The Optimistic Reaper',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-  ];
-
-  vamps2 = [
-    {
-      name: 'Dracula',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'Kurz',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'Vladislav',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'Deacon',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-  ];
-
-  vamps3 = [
-    {
-      name: 'Melisto',
-      text: 'Здесь могла быть ваша рек',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'PUDGE',
-      text: 'Реклама',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'Mstislave',
-      text: 'edsadkdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-    {
-      name: 'Dyacon',
-      text: 'etxteexttsfgsdghjf fkjdsfhdjksf dsfjdsgfds fdgfjdsgf dfskdsf',
-      date: 1232213,
-      change: false,
-      show_text: true,
-    },
-  ];
 
   constructor(private dragulaService: DragulaService) {
     // use these if you want
@@ -130,61 +37,195 @@ export class BoardComponent implements OnInit {
   changeText(index, id_block) {
     switch (id_block) {
       case 0:
-        this.vamps[index].show_text = false;
+        this.cards_of_key_partners[index].show_text = false;
         break;
       case 1:
-        this.vamps2[index].show_text = false;
+        this.cards_of_key_actions[index].show_text = false;
+        break;
+      case 2:
+        this.cards_of_key_resources[index].show_text = false;
+        break;
+      case 3:
+        this.cards_of_value_proposition[index].show_text = false;
+        break;
+      case 4:
+        this.cards_of_customer_relationships[index].show_text = false;
+        break;
+      case 5:
+        this.cards_of_channels[index].show_text = false;
+        break;
+      case 6:
+        this.cards_of_customer_segments[index].show_text = false;
+        break;
+      case 7:
+        this.cards_of_cost_structure[index].show_text = false;
+        break;
+      case 8:
+        this.cards_of_income_streams[index].show_text = false;
         break;
       default:
         console.log(index, id_block);
         break;
     }
-    // this.textarea_show=true;
-  }
-  inputText(event) {
-    console.log('change', event);
-    this.show = true;
-  }
-  clickOk() {
-    console.log('click');
-    this.show = false;
-    this.textarea_show = false;
   }
   onCtrlEnter(index, id_block) {
     switch (id_block) {
       case 0:
-        this.vamps[index].show_text = true;
+        this.cards_of_key_partners[index].show_text = true;
+        this.cards_of_key_partners[index].date = Date.now();
         break;
       case 1:
-        this.vamps2[index].show_text = true;
+        this.cards_of_key_actions[index].show_text = true;
+        this.cards_of_key_actions[index].date = Date.now();
+        break;
+      case 2:
+        this.cards_of_key_resources[index].show_text = true;
+        this.cards_of_key_resources[index].date = Date.now();
+        break;
+      case 3:
+        this.cards_of_value_proposition[index].show_text = true;
+        this.cards_of_value_proposition[index].date = Date.now();
+        break;
+      case 4:
+        this.cards_of_customer_relationships[index].show_text = true;
+        this.cards_of_customer_relationships[index].date = Date.now();
+        break;
+      case 5:
+        this.cards_of_channels[index].show_text = true;
+        this.cards_of_channels[index].date = Date.now();
+        break;
+      case 6:
+        this.cards_of_customer_segments[index].show_text = true;
+        this.cards_of_customer_segments[index].date = Date.now();
+        break;
+      case 7:
+        this.cards_of_cost_structure[index].show_text = true;
+        this.cards_of_cost_structure[index].date = Date.now();
+        break;
+      case 8:
+        this.cards_of_income_streams[index].show_text = true;
+        this.cards_of_income_streams[index].date = Date.now();
         break;
       default:
         console.log(index, id_block);
         break;
     }
-    // this.show = false;
-    // this.textarea_show=false;
   }
+  deleteCard(index, type) {
+    switch (type) {
+      case 0:
+        this.cards_of_key_partners.splice(index, 1);
+        break;
+      case 1:
+        this.cards_of_key_actions.splice(index, 1);
+        break;
+      case 2:
+        this.cards_of_key_resources.splice(index, 1);
+        break;
+      case 3:
+        this.cards_of_value_proposition.splice(index, 1);
+        break;
+      case 4:
+        this.cards_of_customer_relationships.splice(index, 1);
+        break;
+      case 5:
+        this.cards_of_channels.splice(index, 1);
+        break;
+      case 6:
+        this.cards_of_customer_segments.splice(index, 1);
+        break;
+      case 7:
+        this.cards_of_cost_structure.splice(index, 1);
+        break;
+      case 8:
+        this.cards_of_income_streams.splice(index, 1);
+        break;
+      default:
+        console.log(index, type);
+        break;
+    }
+  }
+
+  // focusMethod = function(){
+  //   document.getElementById('add_card').focus();
+  // }
+
+
   addCard(type) {
     switch (type) {
       case 0:
-        this.vamps.push({
+        this.cards_of_key_partners.push({
           name: this.user_name,
           text: '',
           date: Date.now(),
-          change: false,
           show_text: false,
         });
         break;
       case 1:
-        this.vamps2.push({
+        this.cards_of_key_actions.push({
           name: this.user_name,
           text: '',
           date: Date.now(),
-          change: false,
           show_text: false,
         });
         break;
+      case 2:
+        this.cards_of_key_resources.push({
+          name: this.user_name,
+          text: '',
+          date: Date.now(),
+          show_text: false,
+        });
+        break;
+      case 3:
+        this.cards_of_value_proposition.push({
+          name: this.user_name,
+          text: '',
+          date: Date.now(),
+          show_text: false,
+        });
+        break;
+      case 4:
+        this.cards_of_customer_relationships.push({
+          name: this.user_name,
+          text: '',
+          date: Date.now(),
+          show_text: false,
+        });
+        break;
+      case 5:
+        this.cards_of_channels.push({
+          name: this.user_name,
+          text: '',
+          date: Date.now(),
+          show_text: false,
+        });
+        break;
+      case 6:
+        this.cards_of_customer_segments.push({
+          name: this.user_name,
+          text: '',
+          date: Date.now(),
+          show_text: false,
+        });
+        break;
+      case 7:
+        this.cards_of_cost_structure.push({
+          name: this.user_name,
+          text: '',
+          date: Date.now(),
+          show_text: false,
+        });
+        break;
+      case 8:
+        this.cards_of_income_streams.push({
+          name: this.user_name,
+          text: '',
+          date: Date.now(),
+          show_text: false,
+        });
+        break;
+
       default:
         console.log(type);
         break;
@@ -192,7 +233,8 @@ export class BoardComponent implements OnInit {
   }
 }
 type card = {
-  name: string[];
-  text: string[];
+  name: string;
+  text: string;
   date: number;
+  show_text: boolean;
 };
